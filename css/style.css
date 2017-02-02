@@ -144,10 +144,10 @@ h1 {
     }
     .boxes .box:nth-child(3n) {
       margin-right: 0; }
-    .boxes .box-filled-1 {
+    .boxes .box-filled-o {
       background-color: #FFA000;
       background-image: url(../img/o.svg); }
-    .boxes .box-filled-2 {
+    .boxes .box-filled-x {
       background-color: #3688C3;
       background-image: url(../img/x.svg); }
 
