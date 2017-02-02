@@ -95,6 +95,9 @@ h1 {
   padding: 1.25em 0 1em;
   outline: 1px solid #ccc;
   transition: 1s; }
+  .players div {
+    position:relative;
+  }
   .players svg g {
     fill: rgba(0, 0, 0, 0.25); }
   .players:first-child {
@@ -107,8 +110,10 @@ h1 {
   #player1.active svg g, #player2.active svg g {
     fill: #fff; }
   #player1.active {
+    color: #ffffff;
     background: #FFA000; }
   #player2.active {
+    color: #ffffff;
     background: #3688C3; }
 
 .boxes {
@@ -138,4 +143,76 @@ h1 {
       background-color: #3688C3;
       background-image: url(../img/x.svg); }
 
+#player-prompt {
+  background-color: #54D17A;
+}
 
+#player-prompt .container {
+  position: relative;
+  top: 50%;
+  width: 305px;
+  margin: auto;
+  transform: translateY(-50%);
+}
+
+#player-prompt h1 {
+  width: inherit;
+  text-align: center;
+}
+
+#player-prompt .container > * {
+  margin-bottom: 1em;
+}
+
+#player-prompt .container > p {
+  color: #ffffff;
+}
+
+#player-prompt input[type="radio"] {
+  display: none;
+}
+
+#player-prompt label {
+  display: inline-block;
+  background-color: #ddd;
+  padding: 4px 11px;
+  font-size: 1em;
+}
+
+#player-prompt input[type="radio"]:checked + label {
+  background-color: #bbb;
+}
+
+#color-picker {
+  width: 305px;
+  margin: auto;
+}
+
+#color-picker-color {
+  width: 80px;
+  height: 80px;
+  border-radius: 3px;
+  box-shadow: none;
+  float: left;
+  border: none;
+  margin: 10px 20px 20px 10px;
+}
+
+#color-picker-sliders p {
+  margin: 8px 0;
+  vertical-align: middle;
+}
+
+#color-picker-sliders label {
+  color: #ffffff;
+  background-color: transparent;
+  display: inline-block;
+  margin: 0 10px 0 0;
+  width: 30px;
+  font-size: 14px;
+}
+
+#color-picker-sliders input {
+  position: relative;
+  top: 2px;
+}
