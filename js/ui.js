@@ -50,29 +50,37 @@
         o: '<svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-200.000000, -60.000000)" fill="#FFFFFF"><g transform="translate(200.000000, 60.000000)"><path d="M21 36.6L21 36.6C29.6 36.6 36.6 29.6 36.6 21 36.6 12.4 29.6 5.4 21 5.4 12.4 5.4 5.4 12.4 5.4 21 5.4 29.6 12.4 36.6 21 36.6L21 36.6ZM21 42L21 42C9.4 42 0 32.6 0 21 0 9.4 9.4 0 21 0 32.6 0 42 9.4 42 21 42 32.6 32.6 42 21 42L21 42Z"/></g></g></g></svg>'
     };
 
-    // Insert HTML for start and finish screen - hidden by default
-    $board.before($startScreen.hide());
-    $board.before($playerPrompt);
-    $board.after($finishScreen.hide());
-
     // Screens
     var showStartScreen = function () {
-        // Hide board and show start screen
+        $playerPrompt.hide();
         $board.hide();
+        $finishScreen.hide();
+
         $startScreen.show();
     };
 
-    var showFinishScreen = function () {
-        // Hide board and show start screen
-        $board.hide();
-        $finishScreen.show();
-    };
-
     var showPlayerPromopt = function () {
+        $startScreen.hide();
         $board.hide();
         $finishScreen.hide();
-        $startScreen.hide();
+
         $playerPrompt.show();
+    };
+
+    var showBoard = function () {
+        $startScreen.hide();
+        $playerPrompt.hide();
+        $finishScreen.hide();
+
+        $board.show();
+    };
+
+    var showFinishScreen = function () {
+        $startScreen.hide();
+        $playerPrompt.hide();
+        $board.hide();
+
+        $finishScreen.show();
     };
 
     var showPlayer2Prompt = function () {
@@ -162,9 +170,12 @@
         $(this).addClass('box-filled-' + exports.player1.mark);
     });
 
+    // Insert HTML for start and finish screen - hidden by default
+    $board.before($startScreen.hide());
+    $board.before($playerPrompt.hide());
+    $board.after($finishScreen.hide());
+
     showStartScreen();
-    $board.hide();
-    $playerPrompt.hide();
 
     // Exports
     exports.marks = marks;
@@ -172,5 +183,6 @@
     exports.showStartScreen = showStartScreen;
     exports.showPlayerPrompt = showPlayerPromopt;
     exports.showPlayer2Prompt = showPlayer2Prompt;
+    exports.showBoard = showBoard;
     exports.showFinishScreen = showFinishScreen;
 }($, ticTacToe);
