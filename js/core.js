@@ -1,3 +1,3 @@
 var ticTacToe = (function () {
     return {};
-}());
+} ());

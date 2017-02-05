@@ -185,4 +185,4 @@
     exports.showPlayer2Prompt = showPlayer2Prompt;
     exports.showBoard = showBoard;
     exports.showFinishScreen = showFinishScreen;
-}($, ticTacToe);
+} ($, ticTacToe);
