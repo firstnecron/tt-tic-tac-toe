@@ -53,6 +53,7 @@
     // Board Elements
     var $player1 = $('#player1');
     var $player2 = $('#player2');
+    var $box = $('.box');
     
     // Players (Stored until both are created - then passed to session)
     var tempPlayer;
@@ -167,7 +168,7 @@
         // If player name is blank set default
         playerName = playerName === '' ? $playerPrompt.find('h1').text() : playerName;
 
-        var player = new exports.Player(playerName, markType, playerType);
+        var player = new exports.Player(playerName, markType, playerType, color);
 
         if ($playerPrompt.find('h1').text() === 'Player 1') {
             tempPlayer = player;
@@ -180,6 +181,7 @@
 
             tempPlayer = null; // Clear player holder
             prepareBoard(session.player1, session.player2);
+            showBoard();
             exports.setSession(session).startGame();
         }
     });
@@ -193,20 +195,32 @@
         }
     });
 
+    $box.on('mouseenter', function () {
+        var $this = $(this);
+        if ($this.hasClass('box-filled-x') || $this.hasClass('box-filled-o')) {
+            return;
+        }
 
-    $('.box').on('mouseenter', function () {
-        // Todo: Get whoevers turn it is and fill in x or o (replace player1.mark)
         var mark = exports.getCurrentGame().getCurrentPlayer().mark;
-        $(this).append('<img src="img/' + exports.player1.mark + '.svg"/>');
+        $(this).append('<img src="img/' + mark + '.svg"/>');
     });
 
-    $('.box').on('mouseleave', function () {
+    $box.on('mouseleave', function () {
         $(this).find('img').remove();
     });
 
-    $('.box').on('click', function () {
-        // Todo: Get whoevers turn it is and fill in x or o (replace player1.mark)
-        $(this).addClass('box-filled-' + exports.player1.mark);
+    $box.on('click', function () {
+        var $this = $(this);
+        if ($this.hasClass('box-filled-x') || $this.hasClass('box-filled-o')) {
+            return;
+        }
+
+        // Get the box's index in the list (exactly the same as in the board array)
+        $box.index(this);
+
+        var currentPlayer = exports.getCurrentGame().getCurrentPlayer();
+        $this.addClass('box-filled-' + currentPlayer.mark);
+        $this.css('background-color', currentPlayer.rgb);
     });
 
     // Insert HTML for start and finish screen - hidden by default

@@ -1,5 +1,4 @@
 !function($, exports) {
-    // Players
     var session;
     
     var getSession = function () {
