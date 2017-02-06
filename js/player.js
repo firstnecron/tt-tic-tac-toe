@@ -23,7 +23,7 @@
         var emptyBoxes = exports.getCurrentGame().currentState.getEmptyBoxes();
         var randomBoxIndex = emptyBoxes[Math.floor(Math.random() * emptyBoxes.length)];
 
-        exports.$box[randomBoxIndex].click();
+        $(exports.$box[randomBoxIndex]).click();
     };
 
     AI.prototype.notify = function () {

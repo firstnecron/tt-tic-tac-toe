@@ -263,25 +263,41 @@
             return;
         }
 
-        var mark = exports.getCurrentGame().getCurrentPlayer().mark;
-        $(this).append('<img src="img/' + mark + '.svg"/>');
+        var currentPlayer = exports.getCurrentGame().getCurrentPlayer();
+
+        // If the current turn's player is an ai, "prevent default"
+        if (currentPlayer.playerType === 'ai') {
+            return;
+        }
+
+        $(this).append('<img src="img/' + currentPlayer.mark + '.svg"/>');
     });
 
     $box.on('mouseleave', function () {
         $(this).find('img').remove();
     });
 
-    $box.on('click', function () {
+    $box.on('click', function (event) {
         var $this = $(this);
+        $this.find('img').remove();
+
+        // Check if box is filled
         if ($this.hasClass('box-filled-x') || $this.hasClass('box-filled-o')) {
             return;
         }
 
-        // Get the box's index in the list (exactly the same as in the board array)
-        $box.index(this);
-
         var currentGame = exports.getCurrentGame();
         var currentPlayer = currentGame.getCurrentPlayer();
+
+        // Check if human is clicking on AI's turn
+        if (event.originalEvent) {
+            // Human Click
+            // If the current turn's player is an ai, "prevent default"
+            if (currentPlayer.playerType === 'ai') {
+                return;
+            }
+        }
+
         $this.addClass('box-filled-' + currentPlayer.mark);
         $this.css('background-color', currentPlayer.rgb);
 
