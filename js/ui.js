@@ -107,8 +107,6 @@
     // Event Handling
     // Start button on click event
     $startScreen.find('.button').on('click', function () {
-        // Toggle visibility
-        $startScreen.hide();
         showPlayerPromopt();
     });
 
@@ -143,21 +141,19 @@
             showPlayer2Prompt();
         } else {
             exports.player2 = player;
-            $playerPrompt.hide();
             exports.startGame();
         }
     });
 
     // Finish button on click event
     $finishScreen.find('.button').on('click', function () {
-        // Toggle visibility
-        $finishScreen.hide();
         $board.show();
     });
 
 
     $('.box').on('mouseenter', function () {
         // Todo: Get whoevers turn it is and fill in x or o (replace player1.mark)
+        var mark = exports.getCurrentGame().getCurrentPlayer().mark;
         $(this).append('<img src="img/' + exports.player1.mark + '.svg"/>');
     });
 
