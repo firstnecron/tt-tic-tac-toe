@@ -296,6 +296,7 @@
     $board.after($finishScreen.hide());
 
     // Exports
+    exports.$box = $box;
     exports.marks = marks;
 
     // Screens

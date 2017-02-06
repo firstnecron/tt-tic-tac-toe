@@ -69,6 +69,7 @@
 
             if (currentPlayer.playerType === 'ai') {
                 // TODO
+                currentPlayer.ai.notify();
             }
         }
     };
