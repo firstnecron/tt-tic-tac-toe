@@ -55,7 +55,7 @@
     var $player2 = $('#player2');
     
     // Players (Stored until both are created - then passed to session)
-    var player1;
+    var tempPlayer;
 
     // Screens
     var showStartScreen = function () {
@@ -95,7 +95,7 @@
         $playerPrompt.find('h1').text('Player 2');
         $playerPrompt.find('#player-name').val('');
         // Force the other mark for player 2
-        if (player1.mark === 'x') {
+        if (tempPlayer.mark === 'x') {
             $playerPrompt.find('#mark-x').prop('disabled', true);
             $playerPrompt.find('#mark-o').prop('checked', true);
         } else {
@@ -170,16 +170,16 @@
         var player = new exports.Player(playerName, markType, playerType);
 
         if ($playerPrompt.find('h1').text() === 'Player 1') {
-            player1 = player;
-            player1.playerNum = 1;
+            tempPlayer = player;
+            tempPlayer.playerNum = 1;
             showPlayer2Prompt();
         } else {
             var player2 = player;
             player2.playerNum = 2;
-            var session = new exports.Session(player1, player2);
-            
-            player1 = null; // Clear player holder
-            prepareBoard(player1, player2);
+            var session = new exports.Session(tempPlayer, player2);
+
+            tempPlayer = null; // Clear player holder
+            prepareBoard(session.player1, session.player2);
             exports.setSession(session).startGame();
         }
     });
