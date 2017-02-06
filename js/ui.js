@@ -122,6 +122,16 @@
         $player2.prepend(exports.marks[player2.mark]);
         $player2.find('div').text(player2.playerName);
     };
+
+    var cleanBoard = function () {
+        $player1.removeClass('active');
+        $player1.removeAttr('style');
+        $player2.removeClass('active');
+        $player2.removeAttr('style');
+
+        $box.removeAttr('style');
+        $box.removeClass('box-filled-o box-filled-x')
+    };
     
     var setActivePlayer = function (player) {
         if (player.playerNum === 0) {
@@ -157,6 +167,7 @@
 
     // Clear any custom styling that was added
     var cleanFinishScreen = function () {
+        $finishScreen.removeClass('screen-win-tie screen-win-o screen-win-x');
         $finishScreen.removeAttr('style');
     };
 
@@ -212,8 +223,13 @@
     $finishScreen.find('.button').on('click', function () {
         if ($(this).text() === 'Play again') {
             // Play again
+            cleanBoard();
+            cleanFinishScreen();
+            showBoard();
+            exports.getSession().startGame();
         } else {
             // New game
+            // Start fresh - from the start screen - new session
         }
     });
 

@@ -22,7 +22,8 @@
             // Player 2 starts
             this.currentGame = new Game(this.player2.mark, this.player1, this.player2);
         }
-        
+
+        this.gamesPlayed++;
         this.currentGame.start();
     };
 
