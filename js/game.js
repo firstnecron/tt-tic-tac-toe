@@ -55,7 +55,11 @@
                 // Winner - get the player object and call ui function with it
                 exports.prepareFinishScreen(this.getCurrentPlayer());
             }
-            exports.showFinishScreen();
+
+            // Add .5 second delay before showing finish screen
+            setTimeout(function () {
+                exports.showFinishScreen();
+            }, 500);
         } else {
             if (this.currentState.result !== 'starting') {
                 this.movesMade++;
