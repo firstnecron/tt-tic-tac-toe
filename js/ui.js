@@ -218,9 +218,15 @@
         // Get the box's index in the list (exactly the same as in the board array)
         $box.index(this);
 
-        var currentPlayer = exports.getCurrentGame().getCurrentPlayer();
+        var currentGame = exports.getCurrentGame();
+        var currentPlayer = currentGame.getCurrentPlayer();
         $this.addClass('box-filled-' + currentPlayer.mark);
         $this.css('background-color', currentPlayer.rgb);
+
+        var nextState = new exports.State(currentGame.currentState);
+        nextState.board[$box.index(this)] = currentPlayer.mark;
+        nextState.advanceTurn();
+        currentGame.advanceToState(nextState);
     });
 
     // Insert HTML for start and finish screen - hidden by default
