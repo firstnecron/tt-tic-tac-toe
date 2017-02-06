@@ -156,10 +156,11 @@
             player1 = player;
             showPlayer2Prompt();
         } else {
-            // player2 = player
-            var session = new exports.Session(player1, player);
+            var player2 = player;
+            var session = new exports.Session(player1, player2);
             
             player1 = null; // Clear player holder
+            prepareBoard(player1, player2);
             exports.setSession(session).startGame();
         }
     });
