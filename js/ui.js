@@ -141,6 +141,24 @@
             $player2.css('background-color', player.rgb);
         }
     };
+    
+    // Prepares the finish screen
+    // Player is optional (assumed draw)
+    var prepareFinishScreen = function (player) {
+        if (player) {
+            $finishScreen.addClass('screen-win-' + player.mark);
+            $finishScreen.find('.message').text(player.playerName + ' wins!');
+            $finishScreen.css('background-color', player.rgb);
+        } else {
+            $finishScreen.addClass('screen-win-tie');
+            $finishScreen.find('.message').text('Draw!');
+        }
+    };
+
+    // Clear any custom styling that was added
+    var cleanFinishScreen = function () {
+        $finishScreen.removeAttr('style');
+    };
 
     // Event Handling
     // Start button on click event
@@ -229,7 +247,6 @@
 
         var nextState = new exports.State(currentGame.currentState);
         nextState.board[$box.index(this)] = currentPlayer.mark;
-        nextState.advanceTurn();
         currentGame.advanceToState(nextState);
     });
 
@@ -249,4 +266,5 @@
     exports.showFinishScreen = showFinishScreen;
 
     exports.setActivePlayer = setActivePlayer;
+    exports.prepareFinishScreen = prepareFinishScreen;
 } ($, ticTacToe);

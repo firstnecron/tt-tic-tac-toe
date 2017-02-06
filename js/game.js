@@ -47,9 +47,21 @@
             this.isDone = true;
 
             // check state for win or draw
-            // if win, get the player object and call ui function with it
-            // TODO
+            if (state.result === 'draw') {
+                // draw
+                exports.prepareFinishScreen();
+            } else {
+                // Winner - get the player object and call ui function with it
+                exports.prepareFinishScreen(this.getCurrentPlayer());
+            }
+            exports.showFinishScreen();
         } else {
+            if (this.currentState.result !== 'starting') {
+                this.currentState.advanceTurn();
+            } else if (this.currentState.result === 'starting') {
+                this.currentState.result = 'running';
+            }
+
             var currentPlayer = this.getCurrentPlayer();
             exports.setActivePlayer(currentPlayer);
 
@@ -77,8 +89,10 @@
     var State = function (oldState) {
         this.turn = '';
         this.board = [];
+        this.result = 'starting';
 
         if (oldState) {
+            this.result = oldState.result;
             this.turn = oldState.turn;
             this.board = oldState.board;
         }
@@ -95,7 +109,7 @@
                 indexes.push(i);
             }
         }
-        
+
         return indexes;
     };
 
@@ -106,6 +120,7 @@
         // Check rows
         for (var i = 0; i < 6; i = i + 3) {
             if (board[i] !== 0 && board[i] === board[i + 1] && board[i + 1] === board[i + 2]) {
+                this.result = board[i] + ' won';
                 return true;
             }
         }
@@ -113,6 +128,7 @@
         // Check columns
         for (i = 0; i < 3; i++) {
             if (board[i] !== 0 && board[i] === board[i + 3] && board[i + 3] === board[i + 6]) {
+                this.result = board[i] + ' won';
                 return true;
             }
         }
@@ -120,15 +136,22 @@
         // Check diagonals
         // Top left to bottom right
         if (board[0] !== 0 && board[0] === board[4] && board[4] === board[8]) {
+            this.result = board[i] + ' won';
             return true;
         }
         // Top right to bottom left
         if (board[2] !== 0 && board[2] === board[4] && board[4] === board[6]) {
+            this.result = board[i] + ' won';
             return true;
         }
 
         // Check for draw (if empty boxes, game is still running & return false)
-        return this.getEmptyBoxes().length === 0;
+        if (this.getEmptyBoxes().length === 0) {
+            this.result = 'draw';
+            return true;
+        } else {
+            return false;
+        }
     };
 
     exports.Game = Game;
