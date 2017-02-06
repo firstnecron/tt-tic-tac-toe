@@ -68,8 +68,10 @@
             exports.setActivePlayer(currentPlayer);
 
             if (currentPlayer.playerType === 'ai') {
-                // TODO
-                currentPlayer.ai.notify();
+                // Add a "thinking" delay of 1 second
+                setTimeout(function () {
+                    currentPlayer.ai.notify();
+                }, 1000);
             }
         }
     };
