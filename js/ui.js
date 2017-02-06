@@ -129,12 +129,16 @@
         }
 
         $player1.removeClass('active');
+        $player1.removeAttr('style');
         $player2.removeClass('active');
+        $player2.removeAttr('style');
 
         if (player.playerNum === 1) {
             $player1.addClass('active');
+            $player1.css('background-color', player.rgb);
         } else {
             $player2.addClass('active');
+            $player2.css('background-color', player.rgb);
         }
     };
 
