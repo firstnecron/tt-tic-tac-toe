@@ -14,6 +14,9 @@
     var getCurrentGame = function () {
         return session.currentGame;
     };
+
+    // Since this is the last file to load, show start screen after everything else is done
+    exports.showStartScreen();
     
     exports.getSession = getSession;
     exports.setSession = setSession;

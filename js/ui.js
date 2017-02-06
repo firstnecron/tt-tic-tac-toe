@@ -194,8 +194,6 @@
     $board.before($playerPrompt.hide());
     $board.after($finishScreen.hide());
 
-    showStartScreen();
-
     // Exports
     exports.marks = marks;
 
