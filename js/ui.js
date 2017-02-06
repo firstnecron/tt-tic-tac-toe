@@ -112,6 +112,27 @@
         $playerPrompt.find('#blue').val('192');
     };
 
+    // Reset everything and default to player 1 values
+    var cleanPlayerPrompt = function () {
+        // Reset prompt html to player 1
+        $playerPrompt.find('h1').text('Player 1');
+        $playerPrompt.find('#player-name').val('');
+
+        // Clear disables and reset default
+        $playerPrompt.find('#mark-x').prop('checked', true);
+        $playerPrompt.find('#mark-x').prop('disabled', false);
+        $playerPrompt.find('#mark-o').prop('disabled', false);
+
+        // Default to human 2nd player
+        $playerPrompt.find('#human').prop('checked', true);
+
+        // Change to default 1st player color
+        $playerPrompt.find('#color-picker-color').css('background-color', 'rgb(249, 156, 1)');
+        $playerPrompt.find('#red').val('249');
+        $playerPrompt.find('#green').val('156');
+        $playerPrompt.find('#blue').val('1');
+    };
+
     var prepareBoard = function (player1, player2) {
         // Prepare the board
         $player1.find('svg').remove();
@@ -221,15 +242,18 @@
 
     // Finish button on click event
     $finishScreen.find('.button').on('click', function () {
+        cleanBoard();
+        cleanFinishScreen();
+
         if ($(this).text() === 'Play again') {
             // Play again
-            cleanBoard();
-            cleanFinishScreen();
             showBoard();
             exports.getSession().startGame();
         } else {
             // New game
             // Start fresh - from the start screen - new session
+            cleanPlayerPrompt();
+            showStartScreen();
         }
     });
 
