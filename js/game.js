@@ -12,5 +12,17 @@
         this.player2 = player2;
     };
 
+    Session.prototype.startGame = function () {
+        // Get who is starting
+        // If even - player1 if odd - player 2
+        if (this.gamesPlayed % 2 === 0) {
+            // Player 1 starts
+            this.currentGame = new Game(this.player1.mark);
+        } else {
+            // Player 2 starts
+            this.currentGame = new Game(this.player2.mark);
+        }
+    };
+
     exports.Session = Session;
 } ($, ticTacToe);
