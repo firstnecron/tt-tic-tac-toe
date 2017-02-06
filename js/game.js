@@ -123,7 +123,7 @@
         var board = this.board;
 
         // Check rows
-        for (var i = 0; i < 6; i = i + 3) {
+        for (var i = 0; i <= 6; i = i + 3) {
             if (board[i] !== 0 && board[i] === board[i + 1] && board[i + 1] === board[i + 2]) {
                 this.result = board[i] + ' won';
                 return true;
