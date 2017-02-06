@@ -58,6 +58,7 @@
             exports.showFinishScreen();
         } else {
             if (this.currentState.result !== 'starting') {
+                this.movesMade++;
                 this.currentState.advanceTurn();
             } else if (this.currentState.result === 'starting') {
                 this.currentState.result = 'running';
